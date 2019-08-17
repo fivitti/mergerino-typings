@@ -1,6 +1,6 @@
 {
   "name": "mergerino-typing",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "TypeScript typing for Mergerino",
   "scripts": {
     "build": "tsc",
