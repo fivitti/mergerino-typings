@@ -1,0 +1,23 @@
+{
+  "name": "mergerino-typing",
+  "version": "0.0.1",
+  "description": "TypeScript typing for Mergerino",
+  "scripts": {
+    "build": "tsc",
+    "clear": "rimraf ./js",
+    "start": "npm run clear && npm run lint && npm run build && npm test && npm run clear",
+    "test": "ospec ./js/**/*.spec.js",
+    "lint": "tslint --project ./tsconfig.json"
+  },
+  "author": "Fivitti",
+  "license": "MIT",
+  "dependencies": {
+    "copyfiles": "^2.1.1",
+    "dtslint": "^0.9.1",
+    "mergerino": "^0.4.0",
+    "ospec": "^4.0.0",
+    "rimraf": "^3.0.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  }
+}
