@@ -4,7 +4,7 @@ TypeScript type definition for [Megerino 0.4.0](https://github.com/fuzetsu/merge
 
 ## Installation
 
-Typing is located in `definitely_typed/index.d.ts`.  
+Typing is located in `typings/mergerino/index.d.ts`.  
 You need to copy this file to your typings directoy:
 
 ```

@@ -3,14 +3,19 @@ import merge from "mergerino";
 function deletingWorks() {
     interface State {
         deep: {
-            prop?: string,
+            prop?: string;
         };
         fake?: any;
         other: boolean | null;
         prop: boolean;
     }
 
-    const state: State = { prop: true, other: true, deep: { prop: "foo" } };
+    const state: State = {
+        deep: { prop: "foo" },
+        other: true,
+        prop: true,
+    };
+
     const newState = merge(state, {
         deep: { prop: undefined },
         fake: undefined, // deleting non existent key
@@ -24,11 +29,17 @@ function functionSubWorks() {
         age: number;
         name: string;
         obj: {
-            prop?: boolean,
-            replaced?: boolean,
+            prop?: boolean;
+            replaced?: boolean;
         };
     }
-    const state: State = { age: 10, name: "bob", obj: { prop: true } };
+
+    const state: State = {
+        age: 10,
+        name: "bob",
+        obj: { prop: true },
+    };
+
     const newState = merge(state, {
         age: (x) => x * 10,
         name: (x, m) => {
@@ -42,26 +53,33 @@ function deepFunctionSubToUncreatedObjectPath() {
     interface State {
         add?: {
             stats: {
-                count: number,
-            },
+                count: number;
+            };
         };
         orig: boolean;
     }
-    const state: State = { orig: true };
-    const newState = merge(state, {
-        add: {
-            stats: {
-                count: (x) => x + 1,
+
+    const state: State = {
+        orig: true,
+    };
+
+    const newState = merge(
+        state,
+        {
+            add: {
+                stats: {
+                    count: (x) => x + 1,
+                },
             },
         },
-    });
+    );
 }
 
 function addNestedObject() {
     interface State {
         age: number;
         add?: {
-            sub: boolean,
+            sub: boolean;
         };
     }
     const state: State = { age: 10 };
@@ -74,13 +92,29 @@ function deepMergeObjects() {
         age: number;
         sub: {
             sub: {
-                prop: boolean,
-                newProp?: boolean,
-            },
+                prop: boolean;
+                newProp?: boolean;
+            };
         };
     }
-    const state: State = { age: 10, sub: { sub: { prop: true } } };
-    const newState = merge(state, { sub: { sub: { newProp: true } } });
+
+    const state: State = {
+        age: 10, sub: {
+            sub: { prop: true },
+        },
+    };
+
+    const newState = merge(
+        state,
+        {
+            sub: {
+                sub:
+                {
+                    newProp: true,
+                },
+            },
+        },
+    );
 }
 
 function functionPatch() {
@@ -115,7 +149,7 @@ function multiArrayFalsyPatches() {
         0,
         null,
         (s, m) => m(s, { age: 10 }),
-        [[[[[[[{ age: (x) => (x as number) * 3 }]]]]]]],
+        [[[[[[[{ age: (x: number) => x * 3 }]]]]]]],
     );
 }
 
@@ -128,8 +162,8 @@ function deepMergeWithArr() {
     interface State {
         foo: string;
         deep: {
-            arr: number[],
-            prop: boolean,
+            arr: number[];
+            prop: boolean;
         };
     }
     const state: State = { foo: "bar", deep: { arr: [1, 2, 3], prop: false } };
@@ -140,7 +174,7 @@ function deepMergeWithArr() {
 function arrayObjectPatchNonExisitngProperty() {
     interface State {
         arr: Array<{
-            prop: boolean,
+            prop: boolean;
         }>;
     }
     const state: State = { arr: [{ prop: true }] };
@@ -148,10 +182,12 @@ function arrayObjectPatchNonExisitngProperty() {
 }
 
 function topLevelFunctionPatch() {
-    type State = {
-        age: number,
-        foo: string
-    } | { replaced: boolean };
+    type State =
+        | {
+            age: number;
+            foo: string;
+        }
+        | { replaced: boolean };
     const state = { age: 20, foo: "bar" };
     const replacement = { replaced: true };
     const newState = merge<State>(state, () => replacement);
@@ -164,11 +200,15 @@ function reuseObjectIfSameRefWhenPatching() {
 
 function replacePrimitiveWithObjectAndViceVersa() {
     interface State {
-        count: number | {
-            prop: boolean,
+        count:
+        | number
+        | {
+            prop: boolean;
         };
-        foo: number | {
-            prop: boolean,
+        foo:
+        | number
+        | {
+            prop: boolean;
         };
     }
     const state: State = { count: 10, foo: { prop: true } };

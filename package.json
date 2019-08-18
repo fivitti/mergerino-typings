@@ -7,12 +7,11 @@
     "clear": "rimraf ./js",
     "start": "npm run clear && npm run lint && npm run build && npm test && npm run clear",
     "test": "ospec ./js/**/*.spec.js",
-    "lint": "tslint --project ./tsconfig.json"
+    "lint": "tslint --project ./tsconfig.json && dtslint ./typings/mergerino"
   },
   "author": "Fivitti",
   "license": "MIT",
   "dependencies": {
-    "copyfiles": "^2.1.1",
     "dtslint": "^0.9.1",
     "mergerino": "^0.4.0",
     "ospec": "^4.0.0",
